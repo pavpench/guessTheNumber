@@ -43,23 +43,14 @@ button.addEventListener('click', function () {
       document.querySelector('.highscore').textContent = highScore;
     }
   }
-  // When response is higher
-  else if (guess > secretNumber) {
+  //When guess is differenct
+  else if (guess !== secretNumber) {
+    //When response is higher
     if (score > 1) {
       score--;
       document.querySelector('.score').textContent = score;
-      document.querySelector('.message').textContent = 'Too high';
-    } else {
-      document.querySelector('.message').textContent = 'You lost';
-      document.querySelector('.score').textContent = 0;
-    }
-  }
-  // When response is lower
-  else if (guess < secretNumber) {
-    if (score > 1) {
-      score--;
-      document.querySelector('.score').textContent = score;
-      document.querySelector('.message').textContent = 'Too low';
+      document.querySelector('.message').textContent =
+        guess > secretNumber ? 'Too high' : 'Too low';
     } else {
       document.querySelector('.message').textContent = 'You lost';
       document.querySelector('.score').textContent = 0;
