@@ -15,6 +15,9 @@ let highScore = 0;
 let button = document.querySelector('.check');
 const againButton = document.querySelector('.again');
 
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
 againButton.addEventListener('click', function () {
   document.querySelector('.guess').value = '';
   score = 20;
@@ -30,11 +33,11 @@ button.addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   //No input
   if (!guess) {
-    document.querySelector('.message').textContent = 'No Number added';
+    displayMessage('No number added');
   }
   // When response is correct
   else if (guess === secretNumber) {
-    document.querySelector('.message').textContent = 'Correct Number';
+    displayMessage('Correct Number');
     document.querySelector('.number').textContent = secretNumber;
     document.querySelector('body').style.backgroundColor = '#60b347';
     document.querySelector('.number').style.width = '30rem';
@@ -43,25 +46,15 @@ button.addEventListener('click', function () {
       document.querySelector('.highscore').textContent = highScore;
     }
   }
-  // When response is higher
-  else if (guess > secretNumber) {
+  //When guess is differenct
+  else if (guess !== secretNumber) {
+    //When response is higher
     if (score > 1) {
       score--;
       document.querySelector('.score').textContent = score;
-      document.querySelector('.message').textContent = 'Too high';
+      displayMessage(guess > secretNumber ? 'Too high' : 'Too low');
     } else {
-      document.querySelector('.message').textContent = 'You lost';
-      document.querySelector('.score').textContent = 0;
-    }
-  }
-  // When response is lower
-  else if (guess < secretNumber) {
-    if (score > 1) {
-      score--;
-      document.querySelector('.score').textContent = score;
-      document.querySelector('.message').textContent = 'Too low';
-    } else {
-      document.querySelector('.message').textContent = 'You lost';
+      displayMessage('You lost');
       document.querySelector('.score').textContent = 0;
     }
   }
